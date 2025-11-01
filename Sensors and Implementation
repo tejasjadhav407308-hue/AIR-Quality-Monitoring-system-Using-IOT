@@ -1,0 +1,104 @@
+# 🌍 Air Quality Monitoring System Using IoT
+
+## ⚙️ Components Used
+
+| Sr. No | Component | Description |
+|--------|------------|-------------|
+| 1 | Arduino UNO | Main microcontroller to process sensor data |
+| 2 | MQ Sensors (MQ2, MQ3, MQ7, MQ135, MQ9, MQ4) | Detect gases like CO, CH₄, NH₃, Smoke, etc. |
+| 3 | Single Channel Relay Module | Controls the exhaust fan based on gas level |
+| 4 | Exhaust Fan (Brushless Motor) | Expels polluted air when harmful gases detected |
+| 5 | 16x2 LCD Display | Displays real-time gas readings |
+| 6 | GSM Module (SIM900A) | Sends alert message or calls when gas leakage occurs |
+| 7 | Jumper Wires & Breadboard | For circuit connections |
+| 8 | Power Supply | 5V – 2A input |
+
+---
+
+## 🔧 Working Principle
+
+1. **Gas Detection:**  
+   MQ sensors detect gases and send analog signals to Arduino.  
+   The resistance of the sensor changes depending on gas concentration.
+
+2. **Signal Processing:**  
+   Arduino converts analog signals into readable values.
+
+3. **Display:**  
+   Real-time data is shown on a 16x2 LCD screen.
+
+4. **Alert System:**  
+   If gas level crosses a safe threshold, Arduino:
+   - Activates the **Relay**, turning **ON** the exhaust fan.  
+   - Sends an **SMS/Call alert** through the GSM Module.
+
+---
+
+## 🧩 Types of MQ Sensors and Their Working
+
+| Sensor | Detectable Gases | Working Mechanism |
+|---------|------------------|-------------------|
+| MQ-2 | Methane, Butane, LPG, Smoke | Resistance of SnO₂ changes in presence of gas |
+| MQ-3 | Alcohol, Ethanol, Smoke | Sensitive to alcohol vapors, gives analog signal |
+| MQ-7 | CO, Methane, LPG | Detects CO; output changes with gas concentration |
+| MQ-135 | Ammonia, Sulphide, Benzene Vapor | Wide range detection with built-in heater |
+| MQ-9 | CO, Methane, LPG | High sensitivity, optimized for CO detection |
+| MQ-4 | Methane, Butane, LPG, Smoke | Detects CH₄ and LPG with good accuracy |
+
+---
+
+## ⚙️ Relay Module Pin Description
+
+| Pin | Name | Description |
+|------|------|-------------|
+| 1 | Relay Trigger | Input to activate the relay |
+| 2 | GND | Ground connection |
+| 3 | VCC | 5V power supply |
+| 4 | Normally Open (NO) | Connects to load when relay is ON |
+| 5 | Common (COM) | Common terminal |
+| 6 | Normally Closed (NC) | Connected when relay is OFF |
+
+### **Relay Specifications**
+- Voltage: 3.75V–6V  
+- Active current: ~70mA  
+- Max contact voltage: 250VAC / 30VDC  
+- Max current: 10A  
+
+---
+
+## 🌬️ Exhaust Fan
+
+The **Brushless Exhaust Fan** is used to remove contaminated air from enclosed spaces.  
+It offers:
+- Low noise and high efficiency  
+- Reduced maintenance  
+- Long lifespan  
+- Energy-efficient operation  
+
+It is automatically controlled through the **relay module** when gas concentration exceeds a threshold.
+
+---
+
+## 🧠 Implementation Steps
+
+1. **Connect Sensors (MQ2, MQ3, MQ7):**  
+   - MQ sensor **A0 → A0** (Arduino)  
+   - MQ sensor **VCC → 5V**, **GND → GND**
+
+2. **Connect Display (16x2 LCD):**  
+   - **VCC → 5V**, **GND → GND**  
+   - **SCL, SDA → Arduino I²C Pins**  
+   - Display will show live air quality data.
+
+3. **Connect GSM Module (SIM900A):**  
+   - **TX → Pin 2**, **RX → Pin 3**  
+   - **VCC → 5V**, **GND → GND**  
+   - Sends SMS/Call alerts if gas detected.
+
+4. **Connect Relay & Exhaust Fan:**  
+   - **Relay Signal → Digital Pin 8 (Example)**  
+   - **VCC → 5V**, **GND → GND**  
+   - Fan turns ON automatically when gas is detected.
+
+---
+
